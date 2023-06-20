@@ -28,7 +28,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.projects.create');
     }
 
     /**
@@ -39,7 +39,15 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $form_data = $request->all();
+        $new_project = new project();
+        $new_project->fill( $form_data );
+
+        $new_project->save();
+
+
+
+         return redirect()->route('project.index');
     }
 
     /**
@@ -48,9 +56,10 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Project $project)
     {
-        //
+        
+        return view('admin.projects.show', compact('project'));
     }
 
     /**
@@ -59,9 +68,9 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Project $project)
     {
-        //
+        return view('admin.projects.edit', compact('project'));
     }
 
     /**
@@ -71,9 +80,16 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Project $project)
     {
-        //
+        $form_data = $request->all();
+        $project->update($form_data);
+
+
+
+
+
+         return redirect()->route('project.index');
     }
 
     /**
@@ -82,8 +98,9 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Project $project)
     {
-        //
+        $project->delete();
+        return redirect()->route('project.index');
     }
 }
