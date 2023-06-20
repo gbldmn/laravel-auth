@@ -39,6 +39,22 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
+
+        $request->validate(
+            [    
+            'title' => 'required',
+            'content' => 'required',
+            'slug' => 'required'
+            ],
+            [   
+            'title.required' => 'non hai compilato il campo titolo',
+            'content.required' => 'non hai compilato il campo content',
+            'slug.required' => 'non hai compilato il campo slug'
+            ]
+        );
+
+
+
         $form_data = $request->all();
         $new_project = new project();
         $new_project->fill( $form_data );
@@ -82,11 +98,24 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
+
+        $request->validate(
+            [    
+            'title' => 'required',
+            'content' => 'required',
+            'slug' => 'required'
+            ],
+            [   
+            'title.required' => 'non hai compilato il campo titolo',
+            'content.required' => 'non hai compilato il campo content',
+            'slug.required' => 'non hai compilato il campo slug'
+            ]
+        );
+
+
+
         $form_data = $request->all();
         $project->update($form_data);
-
-
-
 
 
          return redirect()->route('project.index');
