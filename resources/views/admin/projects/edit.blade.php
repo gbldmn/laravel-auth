@@ -16,7 +16,7 @@
     @endif
             <div class="row justify-content-center">
                 <div class="col-7">
-                    <form action="{{ route('project.update', $project ) }}" method="POST">
+                    <form action="{{ route('project.update', $project ) }}" method="POST" enctype="multipart/form-data">
                      
                       @csrf
                       @method('PUT')

@@ -65,7 +65,7 @@ class ProjectController extends Controller
 
         if($request->hasFile('cover_image')){
 
-            $path = storage::disk('public')->put('post_image', $request->cover_image);
+            $path = Storage::disk('public')->put('post_image', $request->cover_image);
             $form_data['cover_image'] = $path;
         }
 
@@ -126,14 +126,16 @@ class ProjectController extends Controller
         //     ]
         // );
 
-        if( $request->hasFile('cover_image')){
-            if( $project->cover_image){
+         if( $request->hasFile('cover_image')){
+            if($project->cover_image ){
                 Storage::delete($project->cover_image);
             }
 
             $path = Storage::disk('public')->put('post_image', $request->cover_image);
+        
             $form_data['cover_image'] = $path;
-        }
+           
+         }
 
         // $form_data = $request->all();
 
@@ -152,7 +154,7 @@ class ProjectController extends Controller
     public function destroy(Project $project)
     {
         if($project->cover_image ){
-            storage::delete($project->cover_image);
+            Storage::delete($project->cover_image);
         }
 
         $project->delete();
