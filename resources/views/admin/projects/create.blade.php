@@ -7,7 +7,7 @@
     
             <div class="row justify-content-center">
                 <div class="col-7">
-                    <form action="{{ route('project.store') }}" method="POST">
+                    <form action="{{ route('project.store') }}" method="POST" enctype="multipart/form-data">
                      
                       @csrf
     
@@ -33,6 +33,11 @@
                             @error('slug')
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="project-cover-image" class="form-label">Cover image</label>
+                            <input type="file" class="form-control" name="cover_image" id="project-cover-image" placeholder="" aria-describeby="fileHelpId">
                         </div>
                  
                         <button class="btn btn-success" type="submit">Salva</button>
