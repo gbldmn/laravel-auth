@@ -27,7 +27,8 @@ class UpdateProjectRequest extends FormRequest
         return [   
                 'title' => ['required' ],
                 'content' => ['required'],
-                'slug' => ['required']
+                'slug' => ['required'],
+                'cover_image' => ['required']
         
         ];
     }
