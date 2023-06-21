@@ -4,7 +4,16 @@
 
 <div class="container">
     <h2>modifica card</h2>
-    
+
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach($errors->all() as $elem)
+                <li>{{$elem}}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
             <div class="row justify-content-center">
                 <div class="col-7">
                     <form action="{{ route('project.update', $project ) }}" method="POST">

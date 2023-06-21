@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Project;
+use App\Http\Requests\StoreProjectRequest;
+use App\Http\Requests\UpdateProjectRequest;
+
 
 class ProjectController extends Controller
 {
@@ -16,6 +19,7 @@ class ProjectController extends Controller
     public function index()
     {
         $projects = Project::All();
+        
     
 
         return view('project', compact('projects'));
@@ -37,25 +41,27 @@ class ProjectController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreProjectRequest $request)
     {
+        $form_data = $request->validated();
+        // $request->validate(
+        //     [    
+        //     'title' => 'required',
+        //     'content' => 'required',
+        //     'slug' => 'required'
+        //     ],
+        //     [   
+        //     'title.required' => 'non hai compilato il campo titolo',
+        //     'content.required' => 'non hai compilato il campo content',
+        //     'slug.required' => 'non hai compilato il campo slug'
+        //     ]
+        // );
 
-        $request->validate(
-            [    
-            'title' => 'required',
-            'content' => 'required',
-            'slug' => 'required'
-            ],
-            [   
-            'title.required' => 'non hai compilato il campo titolo',
-            'content.required' => 'non hai compilato il campo content',
-            'slug.required' => 'non hai compilato il campo slug'
-            ]
-        );
 
 
+        // $form_data = $request->all();
 
-        $form_data = $request->all();
+
         $new_project = new project();
         $new_project->fill( $form_data );
 
@@ -96,25 +102,26 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Project $project)
+    public function update(UpdateProjectRequest $request, Project $project)
     {
+        $form_data = $request->validated();
+        // $request->validate(
+        //     [    
+        //     'title' => 'required',
+        //     'content' => 'required',
+        //     'slug' => 'required'
+        //     ],
+        //     [   
+        //     'title.required' => 'non hai compilato il campo titolo',
+        //     'content.required' => 'non hai compilato il campo content',
+        //     'slug.required' => 'non hai compilato il campo slug'
+        //     ]
+        // );
 
-        $request->validate(
-            [    
-            'title' => 'required',
-            'content' => 'required',
-            'slug' => 'required'
-            ],
-            [   
-            'title.required' => 'non hai compilato il campo titolo',
-            'content.required' => 'non hai compilato il campo content',
-            'slug.required' => 'non hai compilato il campo slug'
-            ]
-        );
 
 
+        // $form_data = $request->all();
 
-        $form_data = $request->all();
         $project->update($form_data);
 
 
